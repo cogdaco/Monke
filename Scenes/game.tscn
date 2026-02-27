@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://popymsf11msj"]
+[gd_scene load_steps=15 format=3 uid="uid://popymsf11msj"]
 
 [ext_resource type="PackedScene" uid="uid://dq4ysuhf1ww30" path="res://Scenes/Player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://bxfmq6twk8ida" path="res://Assets/sprites/world_tileset.png" id="2_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://ci4lmmqetpbfw" path="res://Scenes/platform.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://ckmbwymbt38x7" path="res://Scenes/coin.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://hq0hkafo2pt6" path="res://Scenes/killzone.tscn" id="5_wowpa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
 texture = ExtResource("2_qxrlw")
@@ -168,6 +169,9 @@ texture = ExtResource("2_qxrlw")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_wrm1d")
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wowpa"]
+normal = Vector2(0, 1)
+
 [sub_resource type="Animation" id="Animation_wrm1d"]
 resource_name = "Movement"
 length = 3.0
@@ -262,25 +266,54 @@ position = Vector2(0, 6)
 zoom = Vector2(4, 4)
 position_smoothing_enabled = true
 
-[node name="Platform" parent="." instance=ExtResource("3_wrm1d")]
+[node name="Killzone" parent="." instance=ExtResource("5_wowpa")]
+position = Vector2(16, 178)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-20, 13)
+shape = SubResource("WorldBoundaryShape2D_wowpa")
+
+[node name="Coins" type="Node" parent="."]
+
+[node name="Coin" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(120, 72)
+
+[node name="Coin2" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(135, 72)
+
+[node name="Coin3" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(279, 100)
+
+[node name="Coin7" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(352, 96)
+
+[node name="Coin4" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(296, 102)
+
+[node name="Coin5" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(314, 103)
+
+[node name="Coin6" parent="Coins" instance=ExtResource("4_3dryh")]
+position = Vector2(333, 101)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform" parent="Platforms" instance=ExtResource("3_wrm1d")]
 z_index = 5
 position = Vector2(672, 142)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform"]
 libraries = {
 &"": SubResource("AnimationLibrary_3dryh")
 }
 autoplay = "Movement"
 
-[node name="Platform2" parent="." instance=ExtResource("3_wrm1d")]
+[node name="Platform2" parent="Platforms" instance=ExtResource("3_wrm1d")]
 z_index = 5
 position = Vector2(704, 142)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Platform2"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Platforms/Platform2"]
 libraries = {
 &"": SubResource("AnimationLibrary_1l0tm")
 }
 autoplay = "Movement"
-
-[node name="Coin" parent="." instance=ExtResource("4_3dryh")]
-position = Vector2(120, 72)
