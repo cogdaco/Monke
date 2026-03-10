@@ -1,11 +1,17 @@
-[gd_scene load_steps=16 format=3 uid="uid://popymsf11msj"]
+[gd_scene load_steps=19 format=3 uid="uid://popymsf11msj"]
 
+[ext_resource type="Script" uid="uid://dkhd65ohlvawh" path="res://Scripts/game_manager.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://dq4ysuhf1ww30" path="res://Scenes/Player.tscn" id="1_ebmjs"]
 [ext_resource type="Texture2D" uid="uid://bxfmq6twk8ida" path="res://Assets/sprites/world_tileset.png" id="2_qxrlw"]
+[ext_resource type="FontFile" uid="uid://yhms3dmv5e45" path="res://Assets/fonts/PixelOperator8.ttf" id="2_v158k"]
 [ext_resource type="PackedScene" uid="uid://ci4lmmqetpbfw" path="res://Scenes/platform.tscn" id="3_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://ckmbwymbt38x7" path="res://Scenes/coin.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://hq0hkafo2pt6" path="res://Scenes/killzone.tscn" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://cf4c2v4pm3e1c" path="res://Scenes/sime.tscn" id="6_i6g32"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1l0tm"]
+font = ExtResource("2_v158k")
+font_size = 8
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrm1d"]
 texture = ExtResource("2_qxrlw")
@@ -250,6 +256,20 @@ _data = {
 
 [node name="Game" type="Node2D"]
 
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_1l0tm")
+
+[node name="LastLabel" type="Label" parent="GameManager"]
+offset_left = 1356.0
+offset_top = -19.0
+offset_right = 1523.0
+offset_bottom = 38.0
+text = "The last Platform!
+
+You collected X Coins"
+label_settings = SubResource("LabelSettings_1l0tm")
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3dryh")
 format = 2
@@ -326,3 +346,35 @@ position = Vector2(1144, 68)
 
 [node name="Slime" parent="Enemies" instance=ExtResource("6_i6g32")]
 position = Vector2(568, 148)
+
+[node name="Text" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Text"]
+offset_left = -143.0
+offset_top = -53.0
+offset_right = 27.0
+offset_bottom = 4.0
+theme_override_colors/font_color = Color(0.00158982, 0.0337074, 0.120161, 1)
+text = "Left/right or A/D to move
+Left or right
+
+Wouldn't reccomend left...."
+label_settings = SubResource("LabelSettings_1l0tm")
+
+[node name="Label2" type="Label" parent="Text"]
+offset_left = 471.0
+offset_top = 86.0
+offset_right = 638.0
+offset_bottom = 143.0
+text = "Space to jump
+
+Don't touch the sticky guy!"
+label_settings = SubResource("LabelSettings_1l0tm")
+
+[node name="Label3" type="Label" parent="Text"]
+offset_left = 838.0
+offset_top = -26.0
+offset_right = 1005.0
+offset_bottom = 31.0
+text = "Dont Fall!"
+label_settings = SubResource("LabelSettings_1l0tm")
